@@ -1,44 +1,48 @@
-# Define your item pipelines here
+# from sqlalchemy.orm import sessionmaker
+# # from StarDreamSpider.models import GitHubTopics, GitHubTopicsInfo, db_connect, create_table
 #
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
-
-
-class StardreamspiderPipeline:
-    def process_item(self, item, spider):
-        return item
-from sqlalchemy.orm import sessionmaker
-from yourproject.models import YourItemModel, db_connect, create_table
-
-class SQLAlchemyPipeline:
-
-    def open_spider(self, spider):
-        database = spider.settings.get('DATABASE')
-        self.engine = db_connect(database)
-        create_table(self.engine)
-        self.Session = sessionmaker(bind=self.engine)
-
-    def close_spider(self, spider):
-        self.engine.dispose()
-
-    def process_item(self, item, spider):
-        session = self.Session()
-        your_item = YourItemModel()
-        your_item.field1 = item['field1']
-        your_item.field2 = item['field2']
-        your_item.field3 = item['field3']
-
-        try:
-            session.add(your_item)
-            session.commit()
-        except:
-            session.rollback()
-            raise
-        finally:
-            session.close()
-
-        return item
+#
+# class GithubTopicsPipeline:
+#
+# 	def open_spider(self, spider):
+# 		database = spider.settings.get('DATABASE')
+# 		self.engine = db_connect(database)
+# 		create_table(self.engine)
+# 		self.Session = sessionmaker(bind=self.engine)
+#
+# 	def close_spider(self, spider):
+# 		self.engine.dispose()
+#
+# 	def process_item(self, item, spider):
+# 		session = self.Session()
+#
+# 		# 处理 GitHubTopics
+# 		topic = session.query(GitHubTopics).filter_by(url=item['topic_url']).first()
+# 		if not topic:
+# 			topic = GitHubTopics()
+# 			topic.url = item['topic_url']
+# 			topic.name = item['topic_name']
+# 			topic.description = item['topic_description']
+# 			topic.chinese_description = item.get('topic_chinese_description', '')
+# 			session.add(topic)
+#
+# 		# 处理 GitHubTopicsInfo
+# 		info = GitHubTopicsInfo()
+# 		info.title = item['info_title']
+# 		info.description = item['info_description']
+# 		info.chinese_description = item.get('info_chinese_description', '')
+# 		info.url = item['info_url']
+# 		info.logo_url = item['info_logo_url']
+#
+# 		info.topics.append(topic)
+# 		session.add(info)
+#
+# 		try:
+# 			session.commit()
+# 		except:
+# 			session.rollback()
+# 			raise
+# 		finally:
+# 			session.close()
+#
+# 		return item

@@ -1,18 +1,14 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 
 
-class StardreamspiderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-import scrapy
-
-class YourItem(scrapy.Item):
-    field1 = scrapy.Field()
-    field2 = scrapy.Field()
-    field3 = scrapy.Field()
+class GitHubTopicItem(scrapy.Item):
+	topic_url = scrapy.Field()
+	topic_name = scrapy.Field()
+	topic_description = scrapy.Field()
+	topic_chinese_description = scrapy.Field()
+	
+	info_title = scrapy.Field()
+	info_description = scrapy.Field()
+	info_chinese_description = scrapy.Field()
+	info_url = scrapy.Field()
+	info_logo_url = scrapy.Field()

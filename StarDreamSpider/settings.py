@@ -93,13 +93,13 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 # custom_settings
-DATABASE = {
-    'drivername': 'mysql+pymysql',
-    'host': 'localhost',
-    'port': '3306',
-    'username': 'yourusername',
-    'password': 'yourpassword',
-    'database': 'yourdatabase'
-}
-
-from private_settings import *
+# DATABASE = {
+#     'drivername': 'mysql+pymysql',
+#     'host': 'localhost',
+#     'port': '3306',
+#     'username': 'yourusername',
+#     'password': 'yourpassword',
+#     'database': 'yourdatabase'
+# }
+#
+# from private_settings import *
